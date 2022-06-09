@@ -1,0 +1,10 @@
+https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-overview.html
+https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html
+https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html
+https://github.com/aws-samples/simple-websockets-chat-app/blob/master/template.yaml
+
+
+// TODO continuer from:
+https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-route-keys-connect-disconnect.html
+https://stackoverflow.com/questions/54133938/aws-api-gateway-websockets-where-is-the-connectionid

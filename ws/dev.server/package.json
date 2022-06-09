@@ -1,0 +1,19 @@
+{
+  "name": "dev.server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.mjs"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node-fetch": "^2.6.1",
+    "aws-lambda-ws-server": "^0.1.21",
+    "axios": "^0.27.2",
+    "node-fetch": "^3.2.5"
+  },
+  "type": "module"
+}
