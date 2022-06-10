@@ -1,13 +1,23 @@
-https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-overview.html
-https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html
-https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html
-https://github.com/aws-samples/simple-websockets-chat-app/blob/master/template.yaml
+# https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-overview.html
+# https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-routes-integrations.html
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-api.html
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-resource-apigatewayv2-route.html
+# https://github.com/aws-samples/simple-websockets-chat-app/blob/master/template.yaml
+
+# TODO continue from:
+# https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-route-keys-connect-disconnect.html
+# https://stackoverflow.com/questions/54133938/aws-api-gateway-websockets-where-is-the-connectionid
 
 
-// TODO continuer from:
-https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-route-keys-connect-disconnect.html
-https://stackoverflow.com/questions/54133938/aws-api-gateway-websockets-where-is-the-connectionid
+# to connect as client:
+# wscat -H user_id:123 -c http://localhost:5000
 
+# to send message to client:
+# POST
+# http://localhost:5000/stage/%40connections/{CLIENT_CONNECTION_ID}
+## DOCS
+## https://github.com/JamesKyburz/aws-lambda-ws-server/blob/master/packages/aws-post-to-connection/src/index.js
+## https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-how-to-call-websocket-api-connections.html
 
-wscat -H user_id:123 -c http://localhost:5000
+# KAFKA
+# https://aws.amazon.com/pt/msk/
