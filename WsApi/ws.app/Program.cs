@@ -8,7 +8,13 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-InfraDependencyInjector.Inject(builder.Services);
+
+var configuration = builder.Configuration
+    .AddJsonFile("appsettings.json", false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
+    .Build();
+
+await new InfraDependencyInjector().InjectAsync(builder.Services, configuration);
 builder.WebHost.UseKestrel(opt => opt.ListenLocalhost(8080));
 
 var app = builder.Build();
