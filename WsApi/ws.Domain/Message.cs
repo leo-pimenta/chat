@@ -12,5 +12,10 @@ namespace Domain
             this.TargetId = targetId;
             this.Body = body;
         }
+
+        public bool IsValid() => 
+            !(string.IsNullOrWhiteSpace(SenderId)
+            || string.IsNullOrWhiteSpace(TargetId)
+            || string.IsNullOrWhiteSpace(Body));
     }
 }
