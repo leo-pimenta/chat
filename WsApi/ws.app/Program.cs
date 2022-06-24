@@ -14,8 +14,8 @@ var configuration = builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
     .Build();
 
-await new InfraDependencyInjector().InjectAsync(builder.Services, configuration);
-builder.WebHost.UseKestrel(opt => opt.ListenLocalhost(8080));
+new InfraDependencyInjector().Inject(builder.Services, configuration);
+builder.WebHost.UseKestrel(opt => opt.ListenAnyIP(8080));
 
 var app = builder.Build();
 

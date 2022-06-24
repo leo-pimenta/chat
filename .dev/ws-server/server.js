@@ -1,7 +1,7 @@
-const ws = require('aws-lambda-ws-server');
-const axios = require('axios');
+import ws from 'aws-lambda-ws-server';
+import axios from 'axios';
 
-exports.handler = ws(
+ws(
   ws.handler({
     async connect ({ id, event, context }) {
       const user_id_header = event.multiValueHeaders["user_id"];
@@ -12,7 +12,7 @@ exports.handler = ws(
 
       var user_id = user_id_header[0];
 
-      var response = await axios.post(`http://localhost:8080/api/ws/${id}`, {}, {
+      var response = await axios.post(`http://host.docker.internal:8080/api/ws/${id}`, {}, {
         headers: {
           user_id: user_id
         }
@@ -23,12 +23,12 @@ exports.handler = ws(
       return { statusCode: response.status }
     },
     async disconnect ({ id }) {
-      var response = await axios.delete(`http://localhost:8080/api/ws/${id}`);
+      var response = await axios.delete(`http://host.docker.internal:8080/api/ws/${id}`);
       console.log(response);
       return { statusCode: 200 }
     },
     async default ({ message, id }) {
-      var response = await axios.post('http://localhost:8080/api/messages', message);
+      var response = await axios.post('http://host.docker.internal:8080/api/messages', message);
       console.log(response)
       return { statusCode: response.status }
     },

@@ -8,17 +8,17 @@ namespace Infra.Dependencies
 {
     public class InfraDependencyInjector
     {
-        public async Task InjectAsync(IServiceCollection services, IConfiguration configuration)
+        public void Inject(IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<IClock>(SystemClock.Instance);
             services.AddSingleton<IWSConnectionRepository, WSConnectionInMemoryRepository>();
-            await InjectKafkaProducerAsync(services, configuration);
+            InjectKafkaProducer(services, configuration);
         }
 
-        private async Task InjectKafkaProducerAsync(IServiceCollection services, IConfiguration configuration)
+        private void InjectKafkaProducer(IServiceCollection services, IConfiguration configuration)
         {
             var clientId = configuration["Kafka:ClientId"];
-            var host = configuration["Kafka:Host"];
+            var host = Environment.GetEnvironmentVariable("KAFKA_HOST") ?? "localhost";
             var port = int.Parse(configuration["Kafka:Port"]);
             var topicName = configuration["Kafka:TopicName"];
             var configurator = new KafkaConfigurator(clientId, host, port);
