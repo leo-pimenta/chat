@@ -18,8 +18,8 @@ namespace Infra.Dependencies
         private void InjectKafkaProducer(IServiceCollection services, IConfiguration configuration)
         {
             var clientId = configuration["Kafka:ClientId"];
-            var host = Environment.GetEnvironmentVariable("KAFKA_HOST") ?? "localhost";
-            var port = int.Parse(configuration["Kafka:Port"]);
+            var host = Environment.GetEnvironmentVariable("KAFKA_HOST") ?? configuration["KAFKA_HOST"];
+            var port = int.Parse(Environment.GetEnvironmentVariable("KAFKA_PORT") ?? configuration["KAFKA_PORT"]);
             var topicName = configuration["Kafka:TopicName"];
             var configurator = new KafkaConfigurator(clientId, host, port);
             var producer = configurator.CreateProducer();
