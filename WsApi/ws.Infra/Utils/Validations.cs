@@ -1,8 +1,10 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Utils.ValidationExtensions
 {
     public static class Validations
     {
-        public static void ThrowIfNullOrWhitespace(this string s, string message)
+        public static void ThrowIfNullOrWhitespace([NotNull]this string? s, string message)
         {
             if (string.IsNullOrWhiteSpace(s))
             {
@@ -10,7 +12,7 @@ namespace Utils.ValidationExtensions
             }
         }
 
-        public static void ThrowIfNull(this object obj, string paramName)
+        public static void ThrowIfNull([NotNull]this object? obj, string paramName)
         {
             if (obj == null)
             {
