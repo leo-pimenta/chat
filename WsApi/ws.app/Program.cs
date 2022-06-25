@@ -10,8 +10,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var configuration = builder.Configuration
-    .AddJsonFile("appsettings.json", false)
-    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", true)
+    .AddKeyValueFile("../../.dev/.env", optional: true)
+    .AddJsonFile("appsettings.json", optional: false)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true)
     .Build();
 
 new InfraDependencyInjector().Inject(builder.Services, configuration);
