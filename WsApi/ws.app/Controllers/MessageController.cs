@@ -8,9 +8,9 @@ namespace Name
     [Route("/api/messages")]
     public class MessageController : ControllerBase
     {
-        private readonly IMessageRepository MessageRepository;
+        private readonly IMessageRepository<Message> MessageRepository;
 
-        public MessageController(IMessageRepository messageRepository)
+        public MessageController(IMessageRepository<Message> messageRepository)
         {
             this.MessageRepository = messageRepository;
         }
@@ -19,7 +19,7 @@ namespace Name
         public IActionResult NewMessage(MessageRequestDto dto)
         {
             var message = new Message(dto.SenderId, dto.TargetId, dto.Body);
-            this.MessageRepository.Add(message);
+            this.MessageRepository.Add(message, message.TargetId);
             return Ok();
         }
     }

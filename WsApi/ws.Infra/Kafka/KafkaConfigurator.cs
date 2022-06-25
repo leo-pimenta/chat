@@ -1,9 +1,9 @@
 using Confluent.Kafka;
-using Domain;
 
 namespace Infra.Kafka
 {
-    internal class KafkaConfigurator
+    internal class KafkaConfigurator<TMessage, TMessageSerializer>
+        where TMessageSerializer : ISerializer<TMessage>, new()
     {
         private readonly ClientConfig Config;
 
@@ -17,8 +17,8 @@ namespace Infra.Kafka
             };
         }
 
-        public IProducer<string, Message> CreateProducer() => new ProducerBuilder<string, Message>(Config)
-                .SetValueSerializer(new MessageSerializer())
+        public IProducer<string, TMessage> CreateProducer() => new ProducerBuilder<string, TMessage>(Config)
+                .SetValueSerializer(new TMessageSerializer())
                 .Build();
     }
 }

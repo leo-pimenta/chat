@@ -1,9 +1,7 @@
-using Domain;
-
 namespace Infra.Repositories
 {
-    public interface IMessageRepository
+    public interface IMessageRepository<TMessage>
     {
-        void Add(Message message);
+        void Add(TMessage message, string key);
     }
 }
