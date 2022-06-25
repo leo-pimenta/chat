@@ -1,10 +1,11 @@
 using Confluent.Kafka;
-using Infra.Repositories;
 using NodaTime;
+using Repositories.Messages;
+using Utils.ValidationExtensions;
 
-namespace Infra.Kafka
+namespace Kafka
 {
-    internal class KafkaProducer<TMessage> : IMessageRepository<TMessage>
+    public class KafkaProducer<TMessage> : IMessageRepository<TMessage>
     {
         private readonly IProducer<string, TMessage> Producer;
         private readonly string TopicName;

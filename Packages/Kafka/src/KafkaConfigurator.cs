@@ -1,8 +1,8 @@
 using Confluent.Kafka;
 
-namespace Infra.Kafka
+namespace Kafka
 {
-    internal class KafkaConfigurator<TMessage, TMessageSerializer>
+    public class KafkaConfigurator<TMessage, TMessageSerializer>
         where TMessageSerializer : ISerializer<TMessage>, new()
     {
         private readonly ClientConfig Config;
