@@ -1,17 +1,17 @@
 using Confluent.Kafka;
-using Domain;
-using Infra.Repositories;
 using NodaTime;
+using Repositories.Messages;
+using Utils.ValidationExtensions;
 
-namespace Infra.Kafka
+namespace Kafka
 {
-    internal class KafkaProducer : IMessageRepository
+    public class KafkaProducer<TMessage> : IMessageRepository<TMessage>
     {
-        private readonly IProducer<string, Message> Producer;
+        private readonly IProducer<string, TMessage> Producer;
         private readonly string TopicName;
         private readonly IClock Clock;
 
-        public KafkaProducer(IProducer<string, Message> producer, string topicName, IClock clock)
+        public KafkaProducer(IProducer<string, TMessage> producer, string topicName, IClock clock)
         {
             producer.ThrowIfNull("producer");
             topicName.ThrowIfNullOrWhitespace("Invalid topic name.");
@@ -21,26 +21,18 @@ namespace Infra.Kafka
             this.Clock = clock;
         }
 
-        public void Add(Message message)
+        public void Add(TMessage message, string key)
         {
-            ThrowIfInvalidMessage(message);
-            var kafkaMessage = new Confluent.Kafka.Message<string, Message>()
+            message.ThrowIfNull("message");
+            key.ThrowIfNullOrWhitespace("Invalid key.");
+            var kafkaMessage = new Confluent.Kafka.Message<string, TMessage>()
             {
-                Key = message.TargetId,
+                Key = key,
                 Timestamp = GetCurrentTimestamp(),
                 Value = message
             };
 
             Producer.Produce(TopicName, kafkaMessage);
-        }
-
-        private void ThrowIfInvalidMessage(Message message)
-        {
-            message.ThrowIfNull("message");
-            if (!message.IsValid())
-            {
-                throw new ArgumentException("Invalid message.");
-            }
         }
 
         private Timestamp GetCurrentTimestamp() =>

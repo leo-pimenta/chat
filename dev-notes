@@ -10,7 +10,7 @@
 
 
 # to connect as client:
-# wscat -H user_id:123 -c http://localhost:5000
+# wscat -H user_id:123 -c ws://localhost:5000
 
 # to send message to client:
 # POST
