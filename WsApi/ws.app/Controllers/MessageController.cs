@@ -1,6 +1,6 @@
 using Domain;
-using Infra.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Repositories.Messages;
 
 namespace Name
 {

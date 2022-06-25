@@ -1,9 +1,11 @@
 using Domain;
 using Infra.Kafka;
 using Infra.Repositories;
+using Kafka;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NodaTime;
+using Repositories.Messages;
 
 namespace Infra.Dependencies
 {
